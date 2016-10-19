@@ -23,7 +23,7 @@ def part3():
 	#Find the svd of sdata.
 	U, S, V = linalg.svd(normSdata, full_matrices=True)
 
-
+	#3D Scatter Plot.
 	fig = plt.figure()
 	ax = fig.add_subplot(111, projection='3d')
 	v1Line = []
@@ -52,10 +52,33 @@ def part3():
 
 
 def part4():
-	pass
+	global sdata
+	print('Running HW5.py part 3...')
 
+	#Q4 Part A
+	bucky = np.loadtxt('./bucky.csv', delimiter=',')
+	plt.imshow(bucky, cmap='gray')
+	#plt.show()
 
+	#Q4 Part B
+	U, S, V = linalg.svd(bucky, full_matrices=True)
+	plt.bar(list(range(0, len(S))), S)
+	plt.xlabel('Singular Value Index')
+	plt.ylabel('Singular Value Magnitude')
+	#plt.show()
 
+	#Q4 Part C
+	U, S, V = linalg.svd(bucky, full_matrices=False)
+	print('Initial Image size: ' + str(bucky.shape) + ', ' + str(bucky.shape[0]*bucky.shape[1]))
+	for r in [10, 20, 50, 100]:
+		Sr = np.diag(S[:r])
+		img = U[:, :r].dot(Sr).dot(V[:r, :])
+		plt.imshow(img, cmap='gray')
+		#plt.show()
+		#Q4 Part D
+		print('Total size for r = ' + str(r) + ' = ' + str(U[:, :r].shape) + ' + ' + str(Sr.shape) + ' + ' + str(V[:r, :].shape))
+		print(' = ' + str(U[:, :r].shape[0]*U[:, :r].shape[1]) + ' + ' + str(Sr.shape[0]*Sr.shape[1]) + ' + ' + str(V[:r, :].shape[0]*V[:r, :].shape[1]))
+		print(' = ' + str(U[:, :r].shape[0]*U[:, :r].shape[1] + Sr.shape[0]*Sr.shape[1] + V[:r, :].shape[0]*V[:r, :].shape[1]))
 
 
 
@@ -64,10 +87,8 @@ def part4():
 
 def main():
 	part2()
-	part3()
+	#part3()
 	part4()
-
-
 
 
 if __name__ == '__main__':
