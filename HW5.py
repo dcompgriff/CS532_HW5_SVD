@@ -4,13 +4,14 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 
-
-
-
-
 def part2():
-	pass
-
+	A = np.array([[3, -2],
+	             [-1, 5]])
+	U, S, V = linalg.svd(A, full_matrices=False)
+	print('U: ')
+	print(U)
+	print('S: ')
+	print(S)
 
 def part3():
 	global sdata
@@ -50,7 +51,6 @@ def part3():
 	plt.title('Point Weight Histogram')
 	plt.show()
 
-
 def part4():
 	global sdata
 	print('Running HW5.py part 3...')
@@ -80,16 +80,10 @@ def part4():
 		print(' = ' + str(U[:, :r].shape[0]*U[:, :r].shape[1]) + ' + ' + str(Sr.shape[0]*Sr.shape[1]) + ' + ' + str(V[:r, :].shape[0]*V[:r, :].shape[1]))
 		print(' = ' + str(U[:, :r].shape[0]*U[:, :r].shape[1] + Sr.shape[0]*Sr.shape[1] + V[:r, :].shape[0]*V[:r, :].shape[1]))
 
-
-
-
-
-
 def main():
 	part2()
 	#part3()
-	part4()
-
+	#part4()
 
 if __name__ == '__main__':
 	main()
