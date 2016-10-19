@@ -2,6 +2,7 @@ import numpy as np
 import numpy.linalg as linalg
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import math
 
 
 def part2():
@@ -12,6 +13,25 @@ def part2():
 	print(U)
 	print('S: ')
 	print(S)
+
+	#Plot circle, image of circle, and left singular vectors.
+	data = np.zeros((np.linspace(0, 2*3.141).size,2))
+	pos = 0
+	for i in np.linspace(0, 2*3.141):
+		data[pos][0] = math.sin(i)
+		data[pos][1] = math.cos(i)
+		pos += 1
+	plt.plot(list(map(lambda item: item[0], data)), list(map(lambda item: item[1], data)))
+	plt.show()
+	transformedData = A.dot(data.T)
+	transformedData = transformedData.T
+	plt.plot(list(map(lambda item: item[0], transformedData)), list(map(lambda item: item[1], transformedData)))
+	ax1 = U[:, 0] * S[0]
+	ax2 = U[:, 1] * S[1]
+	plt.scatter(ax1[0], ax1[1])
+	plt.scatter(ax2[0], ax2[1])
+	plt.show()
+
 
 def part3():
 	global sdata
